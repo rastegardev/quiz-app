@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/react";
-import { ButtonProps } from "../../interface/index";
+import { ButtonProps } from '@/interface/index';
 
 const Appbutton: React.FC<ButtonProps> = ({
   value,
@@ -25,4 +25,5 @@ const Appbutton: React.FC<ButtonProps> = ({
     </>
   );
 };
+
 export default Appbutton;

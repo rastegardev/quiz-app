@@ -1,6 +1,6 @@
-import Homepage from "./pages/homescreen";
+import Homepage from "@/pages/homescreen";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <>
       <Homepage />

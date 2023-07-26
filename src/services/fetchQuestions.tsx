@@ -4,7 +4,7 @@ import { promises } from "dns";
 
 // https://opentdb.com/api.php?amount=10&category=9&type=boolean
 const baseURl = "https://opentdb.com/api.php?amount=";
-export const getQuestions = async (
+export const getQuestionlist = async (
   amount: number,
   difficulty: string
 ): Promise<any> => {
@@ -17,13 +17,3 @@ export const getQuestions = async (
     throw new Error(`Error fetching the questions. ${error}`);
   }
 };
-
-//! Without Typescript
-// export const getQuestions = async () => {
-//   try {
-//     const response = await axios.get(`${baseURl}10&category=9&type=boolean`);
-//     return response.data.result;
-//   } catch (error) {
-//     throw new Error(`Error fetching the questions. ${error}`);
-//   }
-// };

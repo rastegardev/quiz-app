@@ -6,9 +6,9 @@ import { getQuestionlist } from "@/services/fetchQuestions";
 import { QuestionsProps, AnswerObject } from "@/interface/index";
 import { Box, Heading, Divider } from "@chakra-ui/react";
 
-import "./index.css";
+import { log } from "console";
 
-const Homepage: React.FC = () => {
+const Homepage = () => {
   const [startQuiz, setStartQuiz] = useState(false);
   const [questions, setQuestions] = useState<QuestionsProps[]>([]);
   const [userAnswer, setUserAnswer] = useState<AnswerObject[]>([]);
@@ -23,61 +23,25 @@ const Homepage: React.FC = () => {
         totalQuestions,
         Difficulty.HARD
       );
-      setQuestions(questionListing);
-      setLoading(false);
     };
     fetchQuestions();
   }, []);
 
-  const startQuizGame = (): void => {
-    setStartQuiz(true);
+  const checkAnswer = () => {
+    console.log("Check Answer");
+    setQuestionNumber(1);
   };
 
-  const checkAnswer = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    if (gameOver) return;
-    const choosedAnswer = e.currentTarget.innerText;
-    const correct = questions[questionNumber]?.correct_answer === choosedAnswer;
-    if (correct) setScore((previous) => previous + 1);
-    if (userAnswer.length != questionNumber) {
-      if (!correct) setScore((previous) => previous - 1);
-      const lastIndex = userAnswer.length - 1;
-      if (lastIndex >= 0) {
-        userAnswer.splice(lastIndex, 1);
-        const answerObject = {
-          question: questions[questionNumber]?.question,
-          answer: choosedAnswer,
-          correct,
-          correctAnswer: questions[questionNumber]?.correct_answer,
-        };
-        setUserAnswer((previous) => [...previous, answerObject]);
-      }
-      return;
-    }
-    const answerObject = {
-      question: questions[questionNumber]?.question,
-      answer: choosedAnswer,
-      correct,
-      correctAnswer: questions[questionNumber]?.correct_answer,
-    };
-    setUserAnswer((previous) => [...previous, answerObject]);
+  const startQuizGame = () => {
+    console.log("Start Quiz");
   };
 
-  const nextQuestion = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const nextQuestion = questionNumber + 1;
-    if (totalQuestions === nextQuestion) {
-      setGameOver(true);
-    }
-    setQuestionNumber(nextQuestion);
+  const nextQuestion = () => {
+    console.log("next Question");
   };
 
-  const replayQuiz = (): void => {
-    setStartQuiz(false);
-    setGameOver(false);
-    setQuestionNumber(0);
-    setScore(0);
-    setUserAnswer([]);
+  const replayQuiz = () => {
+    console.log("Replay Quiz");
   };
 
   return (
